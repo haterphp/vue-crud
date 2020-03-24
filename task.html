@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD panel</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script defer src="assets/js/jquery.js"></script>
+    <script defer src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/vue.esm.js" type="module"></script>
+    <script defer src="assets/js/main.js" type="module"></script>
+</head>
+<body>
+<div id="app" data-document-type="task">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">CRUD panel</a>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="index.html">Страны</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="task.html">Задачи</a>
+            </li>
+        </ul>
+    </nav>
+
+    <modal-content-create :content="fields[type]" @click="addContent" @close="closeModal">
+        <template #modal-title>
+            <h5 class="modal-title">Создание Задачи</h5>
+        </template>
+        <template #modal-button-name>
+            Добавить Задачу
+        </template>
+    </modal-content-create>
+
+    <app-component @change_app_state="openCreate" @delete_tr="deleteContent" @edit_tr="openEdit" v-if="contents !== []" :tablecontent="contents">
+        <template #app-title>
+            <h3>Список Задач</h3>
+        </template>
+        <template #app-button-name>
+            Добавить Задачу
+        </template>
+    </app-component>
+
+</div>
+
+</body>
+</html>
